@@ -1,0 +1,37 @@
+package com.sj.zService;
+
+import org.apache.curator.test.TestingServer;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ZServiceApplication.class, webEnvironment = RANDOM_PORT,
+		properties = "spring.cloud.zookeeper.enabled=false")
+public class ZServiceApplicationTests {
+
+
+	TestingServer zkServer;
+
+	@Before
+	public void setUp() throws Exception
+	{
+		zkServer = new TestingServer(2181, true);
+	}
+
+	@After
+	public void tearDown() throws Exception
+	{
+		zkServer.stop();
+	}
+	@Test
+	public void contextLoads() {
+	}
+
+
+}
